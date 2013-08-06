@@ -115,7 +115,7 @@ In order to test the plugin (assuming you have got Ruby and Bundler installer):
 TODO
 ----
 
-See the [issues](/trabe/html-attrs.vim/issues).
+See the [issues](https://github.com/trabe/html-attrs.vim).
 
 
 License
