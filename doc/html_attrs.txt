@@ -1,0 +1,33 @@
+*html_attrs.txt*   For Vim version 7.3    Last Change: 2013 August 5
+
+==============================================================================
+CONTENTS                                                  *html_attrs-contents*
+
+    1.Intro...................................|html_attrs-intro|
+    2.Functionality provided..................|html_attrs-functionality|
+    3.Commands................................|html_attrs-commands|
+    4.Global Options..........................|html_attrs-global-options|
+    6.About...................................|html_attrs-about|
+    7.License.................................|html_attrs-license|
+
+
+==============================================================================
+1. Intro                                                     *html_attrs-intro*
+
+This is a simple plugin to add or modify HTML tags attributes.
+
+
+==============================================================================
+2. Functionality provided                            *html_attrs-functionality*
+
+Commands for inserting an |id| or a |class| atribute, or more generally any
+attribute, in an opening HTML (XML) tag.
+
+DISCLAIMER~
+
+This plugin has a very stupid concept of tag: just a backwards search for an
+opening-tag-like string. So expect no fancy text-object-like kind of
+movements. Sorry :(
+
+
+ vim:tw=78:sw=4:ft=help:norl:
