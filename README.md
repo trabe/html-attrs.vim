@@ -68,7 +68,7 @@ Running the `HtmlAttrsAddId` command will give you:
 
     <span id="|">some text</span>
 
-### Multiple tags handling
+### Handling nested tags
 
 Everything works OK with a simple tag as in the examples above. But what about
 a less contrived example? Well, I am afraid it will not work exactly as you
@@ -76,7 +76,7 @@ would expect, but this is just a tiny I-did-it-my-way (and my first one ever!)
 plugin, so... :)
 
 As you can see, the plugin knows nothing about tags. It just searches backwards
-for an _it-opens-like-a-tag_ string. So:
+for an _it-opens-like-a-tag_ string. So, given
 
     <p>
       <span>
@@ -84,13 +84,15 @@ for an _it-opens-like-a-tag_ string. So:
       |
     </p>
 
+After running the `HtmlAttrsAddId` command you get:
+
     <p>
       <span id="|">
       </span>
     </p>
 
-As you can see, even though the cursor is _inside_ the **p** tag, the plugin
-finds a match before the opening **p** and inserts the **id** there.
+Even though the cursor is "inside" the **p** tag, the plugin finds a match
+before the opening **p** and inserts the **id** there.
 
 
 Options
