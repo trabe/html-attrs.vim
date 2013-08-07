@@ -37,7 +37,6 @@ function! s:HtmlAttrsAddAttr(attr_name, replace)
 endfunction
 
 function! s:HtmlAttrsAddId()
-  echom "FFFFF"
   call s:HtmlAttrsAddAttr('id', g:html_attrs_remove_existing_id)
 endfunction
 
