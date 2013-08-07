@@ -1,7 +1,9 @@
 require 'spec_helper'
 
-describe 'HtmlAttrs' do
+describe 'HtmlAttrsAddId' do
   include FileHelpers
+
+  include_examples 'restores state'
 
   context 'within an empty tag' do
     before do
@@ -18,12 +20,6 @@ describe 'HtmlAttrs' do
       vim.search '@'
       vim.command 'HtmlAttrsAddId'
 
-      # should be:
-      #
-      #   vim.type 'id<Esc>'
-      #
-      # but... it does not work :(
-
       vim.insert 'id'
       vim.write
 
@@ -35,24 +31,6 @@ describe 'HtmlAttrs' do
 
       normalized('test.html').should eq normalize_string_indent(expected)
     end
-
-    specify 'adds a class attribute' do
-      vim.edit 'test.html'
-      vim.search '@'
-      vim.command 'HtmlAttrsAddClass'
-
-      vim.insert 'class'
-      vim.write
-
-      expected =  <<-EOF
-        <span class="class">
-          @
-        </span>
-      EOF
-
-      normalized('test.html').should eq normalize_string_indent(expected)
-    end
-
   end
 
   context 'within a tag with an id' do
@@ -74,23 +52,6 @@ describe 'HtmlAttrs' do
 
       expected =  <<-EOF
         <span id="new-my-id">
-          @
-        </span>
-      EOF
-
-      normalized('test.html').should eq normalize_string_indent(expected)
-    end
-
-    specify 'adds a class attribute' do
-      vim.edit 'test.html'
-      vim.search '@'
-      vim.command 'HtmlAttrsAddClass'
-
-      vim.insert 'new-class'
-      vim.write
-
-      expected =  <<-EOF
-        <span class="new-class" id="my-id">
           @
         </span>
       EOF
@@ -124,23 +85,6 @@ describe 'HtmlAttrs' do
 
       normalized('test.html').should eq normalize_string_indent(expected)
     end
-
-    specify 'extends the class attribute' do
-      vim.edit 'test.html'
-      vim.search '@'
-      vim.command 'HtmlAttrsAddClass'
-
-      vim.insert 'new-class '
-      vim.write
-
-      expected =  <<-EOF
-        <span class="new-class my-class">
-          @
-        </span>
-      EOF
-
-      normalized('test.html').should eq normalize_string_indent(expected)
-    end
   end
 
   context 'with many tags' do
@@ -154,7 +98,7 @@ describe 'HtmlAttrs' do
       EOF
     end
 
-    specify 'adds an id attribute to the closest tag' do
+    specify 'adds an id attribute to the "current" tag' do
 
       vim.edit 'test.html'
       vim.search '@'
@@ -164,8 +108,8 @@ describe 'HtmlAttrs' do
       vim.write
 
       expected =  <<-EOF
-        <p>
-          <span id="id">
+        <p id="id">
+          <span>
           </span>
           @
         </p>

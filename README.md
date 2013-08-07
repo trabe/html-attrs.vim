@@ -70,13 +70,7 @@ Running the `HtmlAttrsAddId` command will give you:
 
 ### Handling nested tags
 
-Everything works OK with a simple tag as in the examples above. But what about
-a less contrived example? Well, I am afraid it will not work exactly as you
-would expect, but this is just a tiny I-did-it-my-way (and my first one ever!)
-plugin, so... :)
-
-As you can see, the plugin knows nothing about tags. It just searches backwards
-for an _it-opens-like-a-tag_ string. So, given
+The plugin uses tag text objects for finding the tag start, so given:
 
     <p>
       <span>
@@ -86,14 +80,10 @@ for an _it-opens-like-a-tag_ string. So, given
 
 After running the `HtmlAttrsAddId` command you get:
 
-    <p>
-      <span id="|">
+    <p id="|">
+      <span>
       </span>
     </p>
-
-Even though the cursor is "inside" the **p** tag, the plugin finds a match
-before the opening **p** and inserts the **id** there.
-
 
 Options
 -------
@@ -107,7 +97,7 @@ Specs
 
 The plugin has a set of specs written in Ruby using Rspec + [vimrunner](https://github.com/AndrewRadev/vimrunner).
 
-In order to test the plugin (assuming you have got Ruby and Bundler installer):
+In order to test the plugin (assuming you have got Ruby and Bundler installed):
 
   1. Run `bundle install`
   2. Run `rspec`
@@ -115,7 +105,7 @@ In order to test the plugin (assuming you have got Ruby and Bundler installer):
 TODO
 ----
 
-See the [issues](https://github.com/trabe/html-attrs.vim).
+See the [issues](https://github.com/trabe/html-attrs.vim/issues).
 
 
 License

@@ -7,7 +7,8 @@ CONTENTS                                                  *html_attrs-contents*
     2.Functionality provided..................|html_attrs-functionality|
     3.Commands................................|html_attrs-commands|
     4.Global Options..........................|html_attrs-global-options|
-    6.About...................................|html_attrs-about|
+    5.About...................................|html_attrs-about|
+    6.Changelog...............................|html_attrs-changelog|
     7.License.................................|html_attrs-license|
 
 
@@ -23,11 +24,83 @@ This is a simple plugin to add or modify HTML tags attributes.
 Commands for inserting an |id| or a |class| atribute, or more generally any
 attribute, in an opening HTML (XML) tag.
 
-DISCLAIMER~
+In the following examples the "|" character represents the current cursor
+position.
 
-This plugin has a very stupid concept of tag: just a backwards search for an
-opening-tag-like string. So expect no fancy text-object-like kind of
-movements. Sorry :(
+Given: >
+    <span>some text|</span>
+<
+
+Run the `HtmlAttrsAddId` command and you get: >
+    <span id="|">some text</span>
+<
+
+Given: >
+    <span id="my-id">some text|</span>
+<
+
+Run the `HtmlAttrsAddId` command and you get: >
+    <span id="|my-id">some text</span>
+<
+
+Given: >
+    <span class="my-class other-class">some text|</span>
+<
+
+Run the `HtmlAttrsAddClass` command and you get: >
+    <span class="|my-class other-class">some text</span>
+<
+
+Given: >
+    <span>some text|</span>
+<
+
+Run the `HtmlAttrsAddClass` command and you get: >
+    <span class="|">some text</span>
+<
+
+==============================================================================
+3. Commands                                               *html_attrs-commands*
+
+:HtmlAttrsAddId                                              *:HtmlAttrsAddId*
+
+Adds an `id` attribute to the "current" tag.
+
+:HtmlAttrsAddClass                                        *:HtmlAttrsAddClass*
+
+Adds a `class` attribute to the "current" tag.
+
+
+==============================================================================
+4. Options                                                *html-attrs-options*
+
+
+                                             *'html_attrs_remove_existing_id'*
+Default: 0
+If enabled, existing `id` attributes will be removed >
+    let g:html_attrs_remove_existing_id=1
+<
+
+
+==============================================================================
+5. About                                                    *html-attrs-about*
+
+This plugin brought to you by Trabe Soluciones, S.L.
+
+Please, use github issues for reporting bugs, suggestions, etc:
+
+https://github.com/trabe/html-attrs.vim/issues
+
+
+==============================================================================
+6. Changelog                                            *html-attrs-changelog*
+
+Once we get to a stable version...
+
+==============================================================================
+7. License                                                *html-attrs-license*
+
+MIT. See the LICENSE file for details.
 
 
  vim:tw=78:sw=4:ft=help:norl:

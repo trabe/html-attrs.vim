@@ -2,8 +2,11 @@ require 'vimrunner'
 require 'vimrunner/rspec'
 require 'file_helpers'
 
+Dir["./spec/support/**/*.rb"].sort.each {|f| require f}
+
 RSpec.configure do |config|
   config.formatter = 'documentation'
+  config.color = true
 end
 
 Vimrunner::RSpec.configure do |config|
