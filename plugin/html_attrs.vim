@@ -1,9 +1,9 @@
 " html_attrs.vim
 " Author: Trabe Soluciones, S.L.
-" Version: 0.0.1
+" Version: 0.0.2
 
 if exists("g:loaded_html_attrs")
-"  finish
+  finish
 endif
 let g:loaded_html_attrs = 1
 
