@@ -24,14 +24,22 @@ function! s:RestoreState(restoreLine)
   if a:restoreLine
     call setpos(".", s:state_l)
   endif
+  execute "normal! \<esc>"
 endfunction
 
 function! s:SearchForOpeningTag()
   "visual select the current tag
+  call setpos("'<", [0,0,0,0])
+  call setpos("'>", [0,0,0,0])
+
   execute "normal! vat\<esc>"
   let l:pos = getpos("'<")
 
-  return l:pos[1:2]
+  if l:pos[1] ==# 0
+    return 0
+  else
+    return l:pos[1:2]
+  endif
 endfunction
 
 function! s:SearchForOpeningTagEnd(openingLine)
