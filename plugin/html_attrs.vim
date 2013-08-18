@@ -38,7 +38,11 @@ function! s:SearchForOpeningTagEnd(openingLine)
   call cursor(a:openingLine)
   let l:end = search(">", "eW")
 
-  return l:end
+  if l:end ==# 0
+    return line('.')
+  else
+    return l:end
+  end
 endfunction
 
 function! s:AddAttr(attr_name, replace)
@@ -48,10 +52,6 @@ function! s:AddAttr(attr_name, replace)
   if !(l:opening[0] ==# 0)
     let l:openingEnd = s:SearchForOpeningTagEnd(l:opening)
     call cursor(l:opening)
-
-    if l:openingEnd ==# 0
-      l:openingEnd = line('.')
-    endif
 
     "search for the attr
     let l:attr = search(" ".a:attr_name."=\"", "eW", l:openingEnd)
@@ -70,9 +70,9 @@ function! s:AddAttr(attr_name, replace)
       endif
     endif
     :startinsert
-    call s:RestoreState(false)
+    call s:RestoreState(0)
   else
-    call s:RestoreState(true)
+    call s:RestoreState(1)
   endif
 endfunction
 
