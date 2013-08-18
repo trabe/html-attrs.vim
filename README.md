@@ -85,13 +85,6 @@ After running the `HtmlAttrsAddId` command you get:
       </span>
     </p>
 
-Options
--------
-
-The plugin has the following options:
-
-  * html\_attrs\_remove\_existing\_id: (defaults to 0) when enabled, existing id, if any, will be removed
-
 Specs
 -----
 
