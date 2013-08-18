@@ -146,8 +146,58 @@ describe 'HtmlAttrsAddClass' do
   end
 
   context 'when the opening tag spans multiple lines' do
-    specify 'adds a class attribute' do
-      pending
+    specify 'appends to an existing class attribute' do
+      write_file 'test.html', <<-EOF
+        <span
+          title="my title"
+          class="test">
+          @
+        </span>
+      EOF
+
+      vim.edit 'test.html'
+      vim.search '@'
+      vim.command 'HtmlAttrsAddClass'
+
+      vim.insert 'class '
+      vim.write
+
+      expected =  <<-EOF
+        <span
+          title="my title"
+          class="class test">
+          @
+        </span>
+      EOF
+
+      normalized('test.html').should eq normalize_string_indent(expected)
+    end
+
+    specify 'adds a class attribute if none exists' do
+      write_file 'test.html', <<-EOF
+        <span
+          title="my title"
+          class="test">
+          @
+        </span>
+      EOF
+
+      vim.edit 'test.html'
+      vim.search '@'
+      vim.command 'HtmlAttrsAddClass'
+
+      vim.insert 'class '
+      vim.write
+
+      expected =  <<-EOF
+        <span
+          title="my title"
+          class="class test">
+          @
+        </span>
+      EOF
+
+      normalized('test.html').should eq normalize_string_indent(expected)
     end
   end
 end

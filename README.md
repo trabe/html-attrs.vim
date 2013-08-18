@@ -95,6 +95,8 @@ In order to test the plugin (assuming you have got Ruby and Bundler installed):
   1. Run `bundle install`
   2. Run `rspec`
 
+You can also run `guard` and get the specs automatically executed every time you change a file.
+
 TODO
 ----
 

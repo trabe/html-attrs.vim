@@ -34,14 +34,27 @@ function! s:SearchForOpeningTag()
   return l:pos[1:2]
 endfunction
 
+function! s:SearchForOpeningTagEnd(openingLine)
+  call cursor(a:openingLine)
+  let l:end = search(">", "eW")
+
+  return l:end
+endfunction
+
 function! s:AddAttr(attr_name, replace)
   call s:SaveState()
   let l:opening = s:SearchForOpeningTag()
 
   if !(l:opening[0] ==# 0)
+    let l:openingEnd = s:SearchForOpeningTagEnd(l:opening)
     call cursor(l:opening)
-    let l:attr = search(" ".a:attr_name."=\"", "e", line('.')) "search for the attr
-    "TODO search not only in the current line but within the whole opening tag
+
+    if l:openingEnd ==# 0
+      l:openingEnd = line('.')
+    endif
+
+    "search for the attr
+    let l:attr = search(" ".a:attr_name."=\"", "eW", l:openingEnd)
 
     if l:attr ==# 0
       "no match, insert the attribute
